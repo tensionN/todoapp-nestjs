@@ -12,10 +12,10 @@ export class Todo {
 
   @Column()
   describe: string;
-  
+
   @Column({ name: 'user_id' })
   user_id: number;
-  
+
   @ManyToOne(() => User, (user) => user.todo)
   @JoinColumn({ name: 'user_id' })
   user: User;

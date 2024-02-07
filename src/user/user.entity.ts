@@ -1,5 +1,5 @@
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
-import { Todo } from "../todo/todo.entity";
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { Todo } from '../todo/todo.entity';
 
 @Entity({ name: 'Users', schema: 'public' })
 export class User {
@@ -7,7 +7,7 @@ export class User {
   id: number;
 
   @Column()
-  nickname: string;
+  email: string;
 
   @Column()
   password: string;
