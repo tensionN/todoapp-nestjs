@@ -2,8 +2,8 @@ import Redis from 'ioredis';
 import {
   Injectable,
   OnApplicationBootstrap,
-  OnApplicationShutdown,
-} from '@nestjs/common';
+  OnApplicationShutdown, UnauthorizedException
+} from "@nestjs/common";
 import { ConfigService } from '@nestjs/config';
 
 export class InvalidatedRefreshTokenError extends Error {}
@@ -39,6 +39,9 @@ export class RefreshTokenIdsStorage
   }
 
   async invalidate(userId: number): Promise<void> {
+    if (!this.redisClient.get(this.getKey(userId))) {
+      throw new UnauthorizedException();
+    }
     await this.redisClient.del(this.getKey(userId));
   }
 

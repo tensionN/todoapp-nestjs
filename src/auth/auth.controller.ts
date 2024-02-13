@@ -18,18 +18,18 @@ export class AuthController {
   @Public()
   @Post('sign-up')
   async signup(@Body() registerUserDto: CreateUserDto) {
-    return this.userService.createUser(registerUserDto);
+    return this.authService.signUp(registerUserDto);
   }
 
   @Public()
   @Post('sign-in')
   async signIn(@Body() signInDto: CreateUserDto) {
-    this.logger.warn(signInDto.email);
+    this.logger.warn(process.env.JWT_SECRET);
     return this.authService.signIn(signInDto);
   }
+  @UseGuards(JwtRefreshTokenGuard)
   @Post('refresh-token')
   async refreshToken(@Req() req) {
-    this.logger.warn(req.headers.authorization.split(' ')[1]);
     return this.authService.refreshAccessToken(
       req.headers.authorization.split(' ')[1],
     );

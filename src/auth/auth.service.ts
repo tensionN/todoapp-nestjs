@@ -1,4 +1,4 @@
-import { Injectable, Logger, UnauthorizedException } from "@nestjs/common";
+import { ConflictException, Injectable, Logger, UnauthorizedException } from "@nestjs/common";
 import { UserService } from '../user/user.service';
 import { JwtService } from '@nestjs/jwt';
 import { CreateUserDto } from '../user/dto/create-user.dto';
@@ -12,6 +12,20 @@ export class AuthService {
     private readonly jwtService: JwtService,
     private readonly refreshTokenIdsStorage: RefreshTokenIdsStorage
   ) {}
+
+  async signUp(signUpDto: CreateUserDto) {
+    const { email, password } = signUpDto;
+
+    const user = await this.userService.findByEmail(email);
+
+    if (user) {
+      throw new ConflictException();
+    }
+
+    const newUser = await this.userService.createUser(signUpDto);
+
+    return newUser;
+  }
 
   async signIn(signInDto: CreateUserDto) {
     const { email, password } = signInDto;

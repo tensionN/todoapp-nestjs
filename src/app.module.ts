@@ -11,6 +11,7 @@ import * as Joi from 'joi';
 @Module({
   imports: [
     ConfigModule.forRoot({
+      isGlobal: true,
       validationSchema: Joi.object({
         DATABASE_HOST: Joi.string().required(),
         APP_PORT: Joi.number(),
