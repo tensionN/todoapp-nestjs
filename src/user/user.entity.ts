@@ -12,6 +12,9 @@ export class User {
   @Column()
   password: string;
 
+  @Column({ default: false })
+  public isMailConfirmed: boolean;
+
   @OneToMany(() => Todo, (todo) => todo.user)
   todo: Todo[];
 

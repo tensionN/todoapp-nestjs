@@ -2,8 +2,9 @@ import Redis from 'ioredis';
 import {
   Injectable,
   OnApplicationBootstrap,
-  OnApplicationShutdown, UnauthorizedException
-} from "@nestjs/common";
+  OnApplicationShutdown,
+  UnauthorizedException,
+} from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 
 export class InvalidatedRefreshTokenError extends Error {}

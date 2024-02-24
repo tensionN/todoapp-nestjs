@@ -8,9 +8,11 @@ import { UserService } from '../user/user.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from '../user/user.entity';
 import { RefreshTokenIdsStorage } from './refresh-token-ids-storage.service';
-import { ConfigModule, ConfigService } from "@nestjs/config";
-import { JwtRefreshTokenStrategy } from "./strategy/jwt-refresh-token.strategy";
-import { JwtStrategy } from "./strategy/jwt.strategy";
+import { ConfigModule, ConfigService } from '@nestjs/config';
+import { JwtRefreshTokenStrategy } from './strategy/jwt-refresh-token.strategy';
+import { JwtStrategy } from './strategy/jwt.strategy';
+import { EmailConfirmationService } from "../email/email-confirmation.service";
+import { EmailService } from "../email/email.service";
 @Module({
   imports: [
     TypeOrmModule.forFeature([User]),
@@ -28,7 +30,9 @@ import { JwtStrategy } from "./strategy/jwt.strategy";
     JwtRefreshTokenStrategy,
     JwtStrategy,
     RefreshTokenIdsStorage,
-    ConfigService
+    ConfigService,
+    EmailConfirmationService,
+    EmailService,
   ],
   controllers: [AuthController],
 })

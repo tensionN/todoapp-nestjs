@@ -11,7 +11,7 @@ export class Todo {
   title: string;
 
   @Column()
-  describe: string;
+  description: string;
 
   @Column({ name: 'user_id' })
   user_id: number;
